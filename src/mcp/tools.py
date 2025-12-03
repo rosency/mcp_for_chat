@@ -5,22 +5,22 @@ SEARCH_PROVIDER = os.getenv("SEARCH_PROVIDER", "duckduckgo")
 
 MCP_SERVERS = {
     "duckduckgo": {
-        "command": "npx",
-        "args": ["-y", "@nickclyde/duckduckgo-mcp-server"],
+        "command": "uvx",
+        "args": ["duckduckgo-mcp-server"],
         "env": {},
         "enabled": SEARCH_PROVIDER == "duckduckgo"
     },
     "brave_search": {
-        "command": "npx",
-        "args": ["-y", "@modelcontextprotocol/server-brave-search"],
+        "command": "uvx",
+        "args": ["mcp-server-brave-search"],
         "env": {
             "BRAVE_API_KEY": os.getenv("BRAVE_API_KEY", "")
         },
         "enabled": SEARCH_PROVIDER == "brave" and bool(os.getenv("BRAVE_API_KEY"))
     },
     "fetch": {
-        "command": "npx",
-        "args": ["-y", "@modelcontextprotocol/server-fetch"],
+        "command": "uvx",
+        "args": ["mcp-server-fetch"],
         "env": {},
         "enabled": True
     }
