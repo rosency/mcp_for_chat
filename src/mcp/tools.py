@@ -1,13 +1,22 @@
 import os
 
+# SEARCH_PROVIDER: "duckduckgo" (default) or "brave"
+SEARCH_PROVIDER = os.getenv("SEARCH_PROVIDER", "duckduckgo")
+
 MCP_SERVERS = {
+    "duckduckgo": {
+        "command": "npx",
+        "args": ["-y", "@anthropic-ai/mcp-server-ddg-search"],
+        "env": {},
+        "enabled": SEARCH_PROVIDER == "duckduckgo"
+    },
     "brave_search": {
         "command": "npx",
         "args": ["-y", "@anthropic-ai/mcp-server-brave-search"],
         "env": {
             "BRAVE_API_KEY": os.getenv("BRAVE_API_KEY", "")
         },
-        "enabled": bool(os.getenv("BRAVE_API_KEY"))
+        "enabled": SEARCH_PROVIDER == "brave" and bool(os.getenv("BRAVE_API_KEY"))
     },
     "fetch": {
         "command": "npx",
