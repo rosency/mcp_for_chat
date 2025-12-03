@@ -19,3 +19,4 @@ class SessionInfo(BaseModel):
 class HealthResponse(BaseModel):
     status: str
     version: str = "1.0.0"
+    tools_available: int = 0
